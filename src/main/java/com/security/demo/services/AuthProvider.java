@@ -34,13 +34,13 @@ public class AuthProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         User user = (User) userDetailsService.loadUserByUsername(username);
-        boolean is_password_match = false;
+        boolean isPasswordMatch = false;
         if(!user.isAccountNonLocked()) {
             throw new LockedException("Account Locked Due To Many Attempts");
         } else {
-            is_password_match = passwordEncoder.matches(authentication.getCredentials().toString(),user.getPassword());
+            isPasswordMatch = passwordEncoder.matches(authentication.getCredentials().toString(),user.getPassword());
         }
-       if(is_password_match) {
+       if(isPasswordMatch) {
           Optional<Attempts> opt_attempts = attemptsRepository.findAttemptsByUsername(username);
            if(opt_attempts.isPresent()) {
                Attempts attempts = opt_attempts.get();
