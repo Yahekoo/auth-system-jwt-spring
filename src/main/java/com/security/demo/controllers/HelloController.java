@@ -31,6 +31,7 @@ public class HelloController {
     }
 
 
+
     @GetMapping(value = "/login")
     public String login(HttpServletRequest req, HttpSession session) {
 
@@ -40,6 +41,13 @@ public class HelloController {
 
         return "login";
     }
+
+
+ /*   @PostMapping(value = "/login")
+    public String loginUser(@RequestParam Map<String,String> params) {
+
+        return "index";
+    }*/
 
     @GetMapping(value = "/register")
     public String register() {
